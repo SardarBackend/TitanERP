@@ -66,4 +66,8 @@ class User extends Authenticatable
 
     }
 
+    public function business(){
+        return $this->belongsTo(business::class , 'business_id');
+    }
+
 }
