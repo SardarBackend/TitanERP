@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\business;
+use App\Models\complaint;
 use App\Models\Resume;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
@@ -53,6 +54,29 @@ class HomeController extends Controller
             $data['business'] = business::where('name',$data['business'])->first()->id;
             $data['file']    = '/storage/' . Storage::disk('public')->putFile('files' , $request->file('file'));
             Resume::create($data);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        return back();
+    }
+
+
+    public function SendcomplaintView(){
+        return view('public.complaint');
+    }
+
+    public function SendcomplaintPost(Request $request)
+    {
+        $data = $request->validate([
+            'subject' => 'required|integer',
+            'content' => 'required|string',
+            'business_id' => 'required|string',
+            'user_id' => 'required|integer|exists:users,id'
+        ]);
+        try {
+            $data['business_id'] = business::where('name',$data['business'])->first()->id;
+            complaint::create($data);
 
         } catch (\Throwable $th) {
             //throw $th;

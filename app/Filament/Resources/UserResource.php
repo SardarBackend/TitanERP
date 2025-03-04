@@ -20,15 +20,15 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-computer-desktop';
 
-    // protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+    protected static string $view = 'filament.pages.managing-remote-employees-page';
 
-    // protected static ?string $pluralModelLabel = 'کاربران';
+    protected static ?string $pluralModelLabel = 'کارمندان دورکار';
 
-    // protected static ?string $modelLabel = 'کاربر';
+    protected static ?string $modelLabel = 'کارمند';
 
-    // protected static ?string $navigationGroup = 'منابع انسانی';
+    protected static ?string $navigationGroup = 'منابع انسانی';
 
 
     public static function form(Form $form): Form
@@ -93,6 +93,7 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        ->query( auth()->user()->business->employees()->where('Is_Telework',1)->getQuery() )
         ->columns([
             Tables\Columns\TextColumn::make('id')->sortable(),
             Tables\Columns\TextColumn::make('name')->searchable(),

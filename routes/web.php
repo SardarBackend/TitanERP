@@ -28,3 +28,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/Request', [App\Http\Controllers\HomeController::class, 'Request'])->name('Request');
 Route::get('/SendResume', [App\Http\Controllers\HomeController::class, 'SendResumeView'])->name('SendResumeView');
 Route::post('/SendResume', [App\Http\Controllers\HomeController::class, 'SendResumePost'])->name('SendResumePost');
+Route::get('/Sendcomplaint', [App\Http\Controllers\HomeController::class, 'SendcomplaintView'])->name('SendcomplaintView');
+Route::post('/Sendcomplaint', [App\Http\Controllers\HomeController::class, 'SendcomplaintPost'])->name('SendcomplaintPost');

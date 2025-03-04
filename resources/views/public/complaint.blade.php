@@ -47,22 +47,20 @@
             <div class="col-md-6">
                 <div class="card shadow-lg animate__animated animate__fadeIn">
                     <h2 class="text-center mb-4">فرم ثبت شکایت</h2>
-                    <form id="complaintForm">
+                    <form action="" method="POST" id="complaintForm">
+                        @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">نام و نام خانوادگی:</label>
-                            <input type="text" class="form-control" id="name" required placeholder="نام خود را وارد کنید">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">ایمیل:</label>
-                            <input type="email" class="form-control" id="email" required placeholder="ایمیل خود را وارد کنید">
+                            <input type="hidden" value="{{auth()->id()}}" name="user_id">
+                            <label for="name" class="form-label">نام شرکت :</label>
+                            <input type="text" name="business_id" class="form-control" id="name" required placeholder="نام خود را وارد کنید">
                         </div>
                         <div class="mb-3">
                             <label for="subject" class="form-label">عنوان شکایت:</label>
-                            <input type="text" class="form-control" id="subject" required placeholder="عنوان را وارد کنید">
+                            <input type="text" name="subject" class="form-control" id="subject" required placeholder="عنوان را وارد کنید">
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">متن شکایت:</label>
-                            <textarea class="form-control" id="message" rows="5" required placeholder="متن شکایت خود را بنویسید"></textarea>
+                            <textarea name="content" class="form-control" id="message" rows="5" required placeholder="متن شکایت خود را بنویسید"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">ارسال شکایت</button>
                     </form>
@@ -72,18 +70,7 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $('#complaintForm').submit(function(event) {
-                event.preventDefault();
-                $('#responseMessage').removeClass('d-none');
-                setTimeout(() => {
-                    $('#responseMessage').addClass('d-none');
-                    $('#complaintForm')[0].reset();
-                }, 3000);
-            });
-        });
-    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

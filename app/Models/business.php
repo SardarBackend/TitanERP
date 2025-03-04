@@ -26,4 +26,8 @@ class business extends Model
     public function resumes(){
         return $this->hasMany(Resume::class,'business_id');
     }
+
+    public function complaints(){
+        return $this->hasMany(complaint::class , 'business_id');
+    }
 }
